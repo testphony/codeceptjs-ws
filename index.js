@@ -280,8 +280,8 @@ class WS extends Helper {
           value: cropLongData(this.messageQuery[correlationId]),
         });
         throw Error(`We didn't receive enough amount of messages (${amountOfMessages}) for the allotted 
-        time for correlationId (${correlationId}). Get (${(this.messageQuery[correlationId]) ?
-  this.messageQuery[correlationId].length : 0}). 
+        time for correlationId (${correlationId}). Get (${(this.messageQuery[correlationId])
+  ? this.messageQuery[correlationId].length : 0}). 
         Check additional context for details about messages`);
       } else throw err;
     });
@@ -296,8 +296,8 @@ class WS extends Helper {
    * @returns {*}
    */
   _waitResponsesWithoutLogging(amountOfMessages = 1, correlationId = this.currentCorrelationId, timeout) {
-    return utils.waitUntil(() => Promise.resolve(this.messageQuery[correlationId] && (this.options.strictWaiting ?
-      this.messageQuery[correlationId].length === amountOfMessages : this.messageQuery[correlationId].length >= amountOfMessages)), timeout);
+    return utils.waitUntil(() => Promise.resolve(this.messageQuery[correlationId] && (this.options.strictWaiting
+      ? this.messageQuery[correlationId].length === amountOfMessages : this.messageQuery[correlationId].length >= amountOfMessages)), timeout);
   }
 
   dontExpectMoreResponsesThan(amountOfMessages = 1, timeout = 1500, correlationId = this.currentCorrelationId) {
@@ -308,14 +308,14 @@ class WS extends Helper {
             title: 'Get WS responses',
             value: cropLongData(this.messageQuery[correlationId]),
           });
-          if (this.messageQuery[correlationId] &&
-          this.messageQuery[correlationId].length <= amountOfMessages) {
+          if (this.messageQuery[correlationId]
+          && this.messageQuery[correlationId].length <= amountOfMessages) {
             if (this.messageQuery[correlationId].length === 1) resolve(this.messageQuery[correlationId][0]);
             resolve(this.messageQuery[correlationId]);
           } else {
             reject(new Error(`We received more messages than (${amountOfMessages}) for the allotted 
-        time for correlationId (${correlationId}). Got (${(this.messageQuery[correlationId]) ?
-  this.messageQuery[correlationId].length : 0}) messages. 
+        time for correlationId (${correlationId}). Got (${(this.messageQuery[correlationId])
+  ? this.messageQuery[correlationId].length : 0}) messages. 
         Check additional context for details about messages`));
           }
         } catch (err) {
