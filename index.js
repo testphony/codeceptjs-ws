@@ -136,7 +136,7 @@ class WS extends Helper {
    */
   sendMessage(message, correlationId, amountOfMessages = 1, timeout) {
     return this._sendMessageWithoutLogging(message, correlationId)
-      .then(res => mochawesome.addMochawesomeContext({
+      .then((res) => mochawesome.addMochawesomeContext({
         title: 'Send WS request',
         value: res,
       })).then(() => {
@@ -339,7 +339,7 @@ class WS extends Helper {
   ) {
     return this._waitResponsesWithoutLogging(ammountOfMessages, correlationId, timeout).then(() => {
       if (
-        this.messageQuery[correlationId][ammountOfMessages - 1].body.orders.every(order => order.orderId !== orderId || order.status !== status)
+        this.messageQuery[correlationId][ammountOfMessages - 1].body.orders.every((order) => order.orderId !== orderId || order.status !== status)
       ) {
         return this.waitMessageWithOrderStatus(orderId, status, timeout, ammountOfMessages + 1, correlationId);
       }
